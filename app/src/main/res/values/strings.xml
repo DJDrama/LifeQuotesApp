@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">ReactiveComposeApp</string>
+    <string name="navigation_drawer">Navigation Drawer</string>
+    <string name="life_quotes_list">Life Quotes List</string>
+    <string name="random_quote">Random Quote</string>
+    <string name="favorite">Favorite</string>
+    <string name="more">More</string>
+    <string name="add">Add Quote</string>
+    <string name="add_quote">Add Quote</string>
+    <string name="modify_quote">Modify Quote</string>
+    <string name="quote">Quote</string>
+    <string name="author">Author</string>
+    <string name="description">Description</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="modify">Modify</string>
 </resources>
