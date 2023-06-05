@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ReactiveComposeApp</string>
+    <string name="app_name">Life Quotes</string>
     <string name="navigation_drawer">Navigation Drawer</string>
     <string name="life_quotes_list">Life Quotes List</string>
     <string name="random_quote">Random Quote</string>
