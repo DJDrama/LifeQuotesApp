@@ -36,6 +36,16 @@ constructor(
                     favorite = intent.quote.favorite.not()
                 )
             )
+
+            is QuoteListIntent.SelectQuote -> selectQuote(intent.quote)
+        }
+    }
+
+    private fun selectQuote(quote: Quote) {
+        _uiState.update {
+            it.copy(
+                selectedIndex = it.quotes.indexOf(element = quote)
+            )
         }
     }
 
@@ -76,8 +86,10 @@ sealed interface QuoteListIntent {
     data class ModifyQuote(val quote: Quote) : QuoteListIntent
     data class AddQuote(val quote: Quote) : QuoteListIntent
     data class SetFavoriteQuote(val quote: Quote) : QuoteListIntent
+    data class SelectQuote(val quote: Quote) : QuoteListIntent
 }
 
 data class QuoteListUiState(
+    val selectedIndex: Int = 0,
     val quotes: List<Quote> = emptyList()
 )

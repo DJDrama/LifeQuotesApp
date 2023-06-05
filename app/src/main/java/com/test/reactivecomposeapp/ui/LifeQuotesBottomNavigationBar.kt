@@ -5,6 +5,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Icecream
 import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.ListAlt
 import androidx.compose.material.icons.filled.More
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -28,7 +29,7 @@ fun LifeQuotesBottomNavigationBar(
             },
             icon = {
                 Icon(
-                    imageVector = Icons.Default.List,
+                    imageVector = Icons.Default.ListAlt,
                     contentDescription = stringResource(id = R.string.life_quotes_list)
                 )
             }

@@ -11,9 +11,8 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Icecream
-import androidx.compose.material.icons.filled.Inbox
 import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.ListAlt
 import androidx.compose.material.icons.filled.MenuOpen
 import androidx.compose.material.icons.filled.More
 import androidx.compose.material3.Icon
@@ -34,6 +33,7 @@ import com.test.reactivecomposeapp.R
 fun NavigationDrawerContent(
     selectedDestination: LifeQuotesDestination,
     modifier: Modifier = Modifier,
+    onClickNavigationDrawerTab: (LifeQuotesDestination) -> Unit,
     onDrawerClicked: () -> Unit = {}
 ) {
     Column(
@@ -42,7 +42,7 @@ fun NavigationDrawerContent(
             .fillMaxHeight()
             .background(MaterialTheme.colorScheme.inverseOnSurface)
             .padding(24.dp)
-    ){
+    ) {
         Row(
             modifier = modifier
                 .fillMaxWidth()
@@ -73,12 +73,14 @@ fun NavigationDrawerContent(
             },
             icon = {
                 Icon(
-                    imageVector = Icons.Default.List,
+                    imageVector = Icons.Default.ListAlt,
                     contentDescription = stringResource(id = R.string.life_quotes_list)
                 )
             },
             colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color.Transparent),
-            onClick = { /*TODO*/ }
+            onClick = {
+                onClickNavigationDrawerTab(LifeQuotesDestination.QUOTES)
+            }
         )
         NavigationDrawerItem(
             selected = selectedDestination == LifeQuotesDestination.RANDOM_QUOTE,
@@ -95,7 +97,9 @@ fun NavigationDrawerContent(
                 )
             },
             colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color.Transparent),
-            onClick = { /*TODO*/ }
+            onClick = {
+                onClickNavigationDrawerTab(LifeQuotesDestination.RANDOM_QUOTE)
+            }
         )
         NavigationDrawerItem(
             selected = selectedDestination == LifeQuotesDestination.FAVORITE,
@@ -112,7 +116,9 @@ fun NavigationDrawerContent(
                 )
             },
             colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color.Transparent),
-            onClick = { /*TODO*/ }
+            onClick = {
+                onClickNavigationDrawerTab(LifeQuotesDestination.FAVORITE)
+            }
         )
         NavigationDrawerItem(
             selected = selectedDestination == LifeQuotesDestination.MORE,
@@ -129,7 +135,9 @@ fun NavigationDrawerContent(
                 )
             },
             colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color.Transparent),
-            onClick = { /*TODO*/ }
+            onClick = {
+                onClickNavigationDrawerTab(LifeQuotesDestination.MORE)
+            }
         )
     }
 }

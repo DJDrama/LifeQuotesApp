@@ -3,6 +3,7 @@ package com.test.reactivecomposeapp.ui
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material.icons.outlined.StarBorder
 import androidx.compose.material3.DrawerState
@@ -20,6 +21,8 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun AppBar(
     title: String? = null,
+    showEdit: Boolean = false,
+    onClickEdit: () -> Unit = {}
 ) {
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
@@ -33,7 +36,19 @@ fun AppBar(
                     style = MaterialTheme.typography.titleMedium
                 )
             }
-        }
+        },
+        actions = {
+            if (showEdit) {
+                IconButton(onClick = {
+                    onClickEdit()
+                }) {
+                    Icon(
+                        imageVector = Icons.Outlined.Edit,
+                        contentDescription = null
+                    )
+                }
+            }
+        },
     )
 }
 

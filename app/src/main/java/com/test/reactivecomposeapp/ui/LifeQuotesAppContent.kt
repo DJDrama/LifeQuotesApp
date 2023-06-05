@@ -8,6 +8,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.test.reactivecomposeapp.ui.favorite.FavoriteListAndDetailContent
+import com.test.reactivecomposeapp.ui.favorite.FavoriteListContent
+import com.test.reactivecomposeapp.ui.favorite.FavoriteQuoteIntent
+import com.test.reactivecomposeapp.ui.favorite.FavoriteQuoteUiState
+import com.test.reactivecomposeapp.ui.more.MoreScreen
 import com.test.reactivecomposeapp.ui.quote_list.QuoteListAndDetailContent
 import com.test.reactivecomposeapp.ui.quote_list.QuoteListContent
 import com.test.reactivecomposeapp.ui.quote_list.QuoteListIntent
@@ -29,6 +34,8 @@ fun LifeQuotesAppContent(
     onQuoteListEvent: (QuoteListIntent) -> Unit,
     randomQuoteUiState: RandomQuoteUiState,
     onRandomQuoteEvent: (RandomQuoteIntent) -> Unit,
+    favoriteQuoteUiState: FavoriteQuoteUiState,
+    onFavoriteQuoteEvent: (FavoriteQuoteIntent) -> Unit,
     onDrawerClicked: () -> Unit = {}
 ) {
     Row(
@@ -37,7 +44,9 @@ fun LifeQuotesAppContent(
         AnimatedVisibility(visible = navigationType == NavigationType.NAVIGATION_RAIL) {
             LifeQuotesNavigationRail(
                 onDrawerClicked = onDrawerClicked
-            )
+            ) {
+                onMainEvent(MainIntent.OnSelectDestination(it))
+            }
         }
         Column(
             modifier = Modifier
@@ -51,8 +60,13 @@ fun LifeQuotesAppContent(
                         quoteListUiState = quoteListUiState,
                         onClickFavorite = {
                             onQuoteListEvent(QuoteListIntent.SetFavoriteQuote(it))
-                        }
-                    )
+                        },
+                        onClickQuoteRow = {
+                            onQuoteListEvent(QuoteListIntent.SelectQuote(it))
+                        },
+                    ){
+                        onQuoteListEvent(it)
+                    }
 
                     LifeQuotesDestination.RANDOM_QUOTE -> RandomQuoteScreen(
                         modifier = modifier.weight(1f),
@@ -60,8 +74,20 @@ fun LifeQuotesAppContent(
                         onRandomQuoteEvent = onRandomQuoteEvent,
                     )
 
-                    LifeQuotesDestination.FAVORITE -> TODO()
-                    LifeQuotesDestination.MORE -> TODO()
+                    LifeQuotesDestination.FAVORITE -> FavoriteListAndDetailContent(
+                        modifier = modifier.weight(1f),
+                        favoriteQuoteUiState = favoriteQuoteUiState,
+                        onClickFavorite = {
+                            onFavoriteQuoteEvent(FavoriteQuoteIntent.SetFavoriteQuote(it))
+                        },
+                        onClickQuoteRow = {
+                            onFavoriteQuoteEvent(FavoriteQuoteIntent.SelectQuote(it))
+                        },
+                    )
+
+                    LifeQuotesDestination.MORE -> MoreScreen(
+                        modifier = modifier.weight(1f)
+                    )
                 }
 
             } else {
@@ -82,10 +108,18 @@ fun LifeQuotesAppContent(
                         onRandomQuoteEvent = onRandomQuoteEvent,
                     )
 
-                    LifeQuotesDestination.FAVORITE -> TODO()
-                    LifeQuotesDestination.MORE -> TODO()
-                }
+                    LifeQuotesDestination.FAVORITE -> FavoriteListContent(
+                        modifier = modifier.weight(1f),
+                        favoriteQuoteUiState = favoriteQuoteUiState,
+                        onClickFavorite = {
+                            onFavoriteQuoteEvent(FavoriteQuoteIntent.SetFavoriteQuote(it))
+                        }
+                    )
 
+                    LifeQuotesDestination.MORE -> MoreScreen(
+                        modifier = modifier.weight(1f)
+                    )
+                }
             }
 
             AnimatedVisibility(visible = navigationType == NavigationType.BOTTOM_NAVIGATION) {
@@ -97,4 +131,9 @@ fun LifeQuotesAppContent(
             }
         }
     }
+}
+
+@Composable
+fun ListAndDetailComponents() {
+
 }

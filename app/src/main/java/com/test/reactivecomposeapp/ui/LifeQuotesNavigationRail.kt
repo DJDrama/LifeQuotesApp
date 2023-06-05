@@ -5,7 +5,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Icecream
 import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.ListAlt
 import androidx.compose.material.icons.filled.More
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationRail
@@ -19,6 +19,7 @@ import com.test.reactivecomposeapp.R
 fun LifeQuotesNavigationRail(
     modifier: Modifier = Modifier,
     onDrawerClicked: () -> Unit = {},
+    onClickNavigationRailTab: (LifeQuotesDestination) -> Unit,
 ) {
     NavigationRail(modifier = modifier.fillMaxHeight()) {
         NavigationRailItem(
@@ -33,40 +34,48 @@ fun LifeQuotesNavigationRail(
         )
         NavigationRailItem(
             selected = false,
-            onClick = { } ,
+            onClick = {
+                onClickNavigationRailTab(LifeQuotesDestination.QUOTES)
+            } ,
             icon = {
                 Icon(
-                    imageVector = Icons.Default.Icecream,
+                    imageVector = Icons.Default.ListAlt,
                     contentDescription = stringResource(id = R.string.life_quotes_list)
                 )
             }
         )
         NavigationRailItem(
             selected = false,
-            onClick = { } ,
+            onClick = {
+                onClickNavigationRailTab(LifeQuotesDestination.RANDOM_QUOTE)
+            } ,
             icon = {
                 Icon(
-                    imageVector = Icons.Default.Favorite,
+                    imageVector = Icons.Default.Icecream,
                     contentDescription = stringResource(id = R.string.random_quote)
                 )
             }
         )
         NavigationRailItem(
             selected = false,
-            onClick = { } ,
+            onClick = {
+                onClickNavigationRailTab(LifeQuotesDestination.FAVORITE)
+            } ,
             icon = {
                 Icon(
-                    imageVector = Icons.Default.More,
+                    imageVector = Icons.Default.Favorite,
                     contentDescription = stringResource(id = R.string.favorite)
                 )
             }
         )
         NavigationRailItem(
             selected = false,
-            onClick = { } ,
+            onClick = {
+                onClickNavigationRailTab(LifeQuotesDestination.MORE)
+            } ,
             icon = {
                 Icon(
-                    imageVector = Icons.Default.Menu,
+                    imageVector = Icons.Default.More,
                     contentDescription = stringResource(id = R.string.more)
                 )
             }

@@ -13,6 +13,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.window.layout.FoldingFeature
 import androidx.window.layout.WindowInfoTracker
 import com.test.reactivecomposeapp.MyApplication
+import com.test.reactivecomposeapp.ui.favorite.FavoriteQuoteViewModel
+import com.test.reactivecomposeapp.ui.favorite.FavoriteQuoteViewModelFactory
 import com.test.reactivecomposeapp.ui.quote_list.QuoteListViewModel
 import com.test.reactivecomposeapp.ui.quote_list.QuoteListViewModelFactory
 import com.test.reactivecomposeapp.ui.random_quote.RandomQuoteViewModel
@@ -77,6 +79,15 @@ class MainActivity : ComponentActivity() {
                 val randomQuoteUiState =
                     randomQuoteViewModel.uiState.collectAsStateWithLifecycle().value
 
+                val favoriteQuoteViewModel: FavoriteQuoteViewModel = viewModel(
+                    factory = FavoriteQuoteViewModelFactory(
+                        getFavoriteQuotesUseCase = (application as MyApplication).getFavoriteQuotesUseCase,
+                        modifyQuoteUseCase = (application as MyApplication).modifyQuoteUseCase,
+                    )
+                )
+                val favoriteQuoteUiState =
+                    favoriteQuoteViewModel.uiState.collectAsStateWithLifecycle().value
+
                 LifeQuotesApp(
                     windowSize = windowSize.widthSizeClass,
                     foldingDevicePosture = devicePosture,
@@ -91,7 +102,9 @@ class MainActivity : ComponentActivity() {
                     randomQuoteUiState = randomQuoteUiState,
                     onRandomQuoteEvent = {
                         randomQuoteViewModel.handleIntent(intent = it)
-                    }
+                    },
+                    favoriteQuoteUiState = favoriteQuoteUiState,
+                    onFavoriteQuoteEvent = favoriteQuoteViewModel::handleIntent
                 )
             }
         }

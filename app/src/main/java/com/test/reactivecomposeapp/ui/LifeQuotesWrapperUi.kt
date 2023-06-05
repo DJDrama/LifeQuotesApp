@@ -8,6 +8,8 @@ import androidx.compose.material3.PermanentNavigationDrawer
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import com.test.reactivecomposeapp.ui.favorite.FavoriteQuoteIntent
+import com.test.reactivecomposeapp.ui.favorite.FavoriteQuoteUiState
 import com.test.reactivecomposeapp.ui.quote_list.QuoteListIntent
 import com.test.reactivecomposeapp.ui.quote_list.QuoteListUiState
 import com.test.reactivecomposeapp.ui.random_quote.RandomQuoteIntent
@@ -25,18 +27,22 @@ fun LifeQuotesWrapperUI(
     quoteListUiState: QuoteListUiState,
     onQuoteListEvent: (QuoteListIntent) -> Unit,
     randomQuoteUiState: RandomQuoteUiState,
-    onRandomQuoteEvent: (RandomQuoteIntent) -> Unit
+    onRandomQuoteEvent: (RandomQuoteIntent) -> Unit,
+    favoriteQuoteUiState: FavoriteQuoteUiState,
+    onFavoriteQuoteEvent: (FavoriteQuoteIntent) -> Unit,
 ) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
-
-    val selectedDestination = LifeQuotesDestination.QUOTES
 
     if (navigationType == NavigationType.PERMANENT_NAVIGATION_DRAWER) {
         PermanentNavigationDrawer(
             drawerContent = {
                 PermanentDrawerSheet {
-                    NavigationDrawerContent(selectedDestination)
+                    NavigationDrawerContent(
+                        selectedDestination = mainUiState.selectedDestination,
+                        onClickNavigationDrawerTab = {
+                            onMainEvent(MainIntent.OnSelectDestination(it))
+                        })
                 }
             }
         ) {
@@ -49,6 +55,8 @@ fun LifeQuotesWrapperUI(
                 onQuoteListEvent = onQuoteListEvent,
                 randomQuoteUiState = randomQuoteUiState,
                 onRandomQuoteEvent = onRandomQuoteEvent,
+                favoriteQuoteUiState = favoriteQuoteUiState,
+                onFavoriteQuoteEvent = onFavoriteQuoteEvent,
             )
         }
     } else {
@@ -56,7 +64,10 @@ fun LifeQuotesWrapperUI(
             drawerContent = {
                 ModalDrawerSheet {
                     NavigationDrawerContent(
-                        selectedDestination = selectedDestination,
+                        selectedDestination = mainUiState.selectedDestination,
+                        onClickNavigationDrawerTab = {
+                            onMainEvent(MainIntent.OnSelectDestination(it))
+                        },
                         onDrawerClicked = {
                             scope.launch {
                                 drawerState.close()
@@ -76,6 +87,8 @@ fun LifeQuotesWrapperUI(
                 onQuoteListEvent = onQuoteListEvent,
                 randomQuoteUiState = randomQuoteUiState,
                 onRandomQuoteEvent = onRandomQuoteEvent,
+                favoriteQuoteUiState = favoriteQuoteUiState,
+                onFavoriteQuoteEvent = onFavoriteQuoteEvent,
                 onDrawerClicked = {
                     scope.launch {
                         drawerState.open()

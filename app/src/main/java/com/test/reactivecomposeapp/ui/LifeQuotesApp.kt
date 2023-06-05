@@ -2,6 +2,8 @@ package com.test.reactivecomposeapp.ui
 
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
+import com.test.reactivecomposeapp.ui.favorite.FavoriteQuoteIntent
+import com.test.reactivecomposeapp.ui.favorite.FavoriteQuoteUiState
 import com.test.reactivecomposeapp.ui.quote_list.QuoteListIntent
 import com.test.reactivecomposeapp.ui.quote_list.QuoteListUiState
 import com.test.reactivecomposeapp.ui.random_quote.RandomQuoteIntent
@@ -20,6 +22,8 @@ fun LifeQuotesApp(
     onQuoteListEvent: (QuoteListIntent) -> Unit,
     randomQuoteUiState : RandomQuoteUiState,
     onRandomQuoteEvent: (RandomQuoteIntent) ->Unit,
+    favoriteQuoteUiState: FavoriteQuoteUiState,
+    onFavoriteQuoteEvent: (FavoriteQuoteIntent) -> Unit,
 ) {
     val navigationType: NavigationType
     val contentType: ContentType
@@ -62,6 +66,8 @@ fun LifeQuotesApp(
         onQuoteListEvent = onQuoteListEvent,
         randomQuoteUiState = randomQuoteUiState,
         onRandomQuoteEvent = onRandomQuoteEvent,
+        favoriteQuoteUiState = favoriteQuoteUiState,
+        onFavoriteQuoteEvent = onFavoriteQuoteEvent,
     )
 }
 
