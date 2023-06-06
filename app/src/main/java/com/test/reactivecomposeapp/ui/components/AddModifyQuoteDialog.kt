@@ -230,7 +230,7 @@ private fun AddModifyQuoteUiContent(
                         text = if (quote != null) {
                             stringResource(R.string.modify)
                         } else {
-                            stringResource(R.string.add)
+                            stringResource(R.string.add_quote)
                         },
                         style = MaterialTheme.typography.labelMedium,
                         modifier = Modifier.fillMaxWidth(),

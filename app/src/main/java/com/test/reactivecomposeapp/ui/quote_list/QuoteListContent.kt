@@ -10,11 +10,13 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.test.reactivecomposeapp.R
 import com.test.reactivecomposeapp.domain.model.Quote
@@ -34,7 +36,7 @@ fun QuoteListContent(
         modifier = modifier,
         topBar = {
             AppBar(
-                title = "Quotes",
+                title = stringResource(id = R.string.life_quotes_list),
             )
         },
         floatingActionButton = {
@@ -48,24 +50,34 @@ fun QuoteListContent(
                 Icon(
                     Icons.Rounded.Add,
                     tint = MaterialTheme.colorScheme.onBackground,
-                    contentDescription = stringResource(id = R.string.add)
+                    contentDescription = stringResource(id = R.string.add_quote)
                 )
             }
         }
     ) { padding ->
-        LazyColumn(
-            modifier = modifier
-                .fillMaxSize()
-                .padding(top = padding.calculateTopPadding() + 8.dp)
-        ) {
-            items(items = quoteListUiState.quotes) { quote ->
-                QuoteListItem(
-                    quote = quote,
-                    onClickFavorite = onClickFavorite
-                ) {
-                    quoteItem.value = it
+        if (quoteListUiState.quotes.isNotEmpty()) {
+            LazyColumn(
+                modifier = modifier
+                    .fillMaxSize()
+                    .padding(top = padding.calculateTopPadding() + 8.dp)
+            ) {
+                items(items = quoteListUiState.quotes) { quote ->
+                    QuoteListItem(
+                        quote = quote,
+                        onClickFavorite = onClickFavorite
+                    ) {
+                        quoteItem.value = it
+                    }
                 }
             }
+        } else {
+            Text(
+                modifier = modifier
+                    .padding(all = padding.calculateTopPadding() + 16.dp)
+                    .fillMaxSize(),
+                textAlign = TextAlign.Center,
+                text = stringResource(R.string.no_quotes)
+            )
         }
     }
     if (onAddQuoteClick.value || quoteItem.value != null) {

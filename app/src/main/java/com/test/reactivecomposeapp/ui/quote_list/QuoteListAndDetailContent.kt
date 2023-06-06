@@ -8,11 +8,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.test.reactivecomposeapp.R
 import com.test.reactivecomposeapp.domain.model.Quote
 import com.test.reactivecomposeapp.ui.AppBar
 import com.test.reactivecomposeapp.ui.components.AddModifyQuoteDialog
@@ -31,7 +35,7 @@ fun QuoteListAndDetailContent(
         modifier = modifier,
         topBar = {
             AppBar(
-                title = "Favorite Quotes",
+                title = stringResource(id = R.string.life_quotes_list),
                 showEdit = true
             ) {
                 onAddQuoteClick.value = true
@@ -39,30 +43,40 @@ fun QuoteListAndDetailContent(
             }
         },
     ) { padding ->
-        Row(
-            modifier = modifier
-                .fillMaxSize()
-                .padding(top = padding.calculateTopPadding() + 8.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            LazyColumn(modifier = modifier.weight(1f)) {
-                items(quoteListUiState.quotes) { quote ->
-                    QuoteListItem(
-                        quote = quote,
-                        onClickFavorite = onClickFavorite,
-                        onClickQuoteRow = onClickQuoteRow
-                    )
+        if (quoteListUiState.quotes.isNotEmpty()) {
+            Row(
+                modifier = modifier
+                    .fillMaxSize()
+                    .padding(top = padding.calculateTopPadding() + 8.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                LazyColumn(modifier = modifier.weight(1f)) {
+                    items(quoteListUiState.quotes) { quote ->
+                        QuoteListItem(
+                            quote = quote,
+                            onClickFavorite = onClickFavorite,
+                            onClickQuoteRow = onClickQuoteRow
+                        )
+                    }
+                }
+                Column(
+                    modifier = modifier
+                        .weight(1f)
+                ) {
+                    if (quoteListUiState.quotes.isNotEmpty())
+                        QuoteDetailScreen(
+                            quote = quoteListUiState.quotes[quoteListUiState.selectedIndex]
+                        )
                 }
             }
-            Column(
+        }else{
+            Text(
                 modifier = modifier
-                    .weight(1f)
-            ) {
-                if (quoteListUiState.quotes.isNotEmpty())
-                    QuoteDetailScreen(
-                        quote = quoteListUiState.quotes[quoteListUiState.selectedIndex]
-                    )
-            }
+                    .padding(all = padding.calculateTopPadding() + 16.dp)
+                    .fillMaxSize(),
+                textAlign = TextAlign.Center,
+                text = stringResource(R.string.no_quotes)
+            )
         }
     }
     if (onAddQuoteClick.value || quoteItem.value != null) {

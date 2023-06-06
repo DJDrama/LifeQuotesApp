@@ -31,7 +31,7 @@ fun RandomQuoteScreen(
         modifier = modifier,
         topBar = {
             AppBar(
-                title = "Random Quotes",
+                title = stringResource(id = R.string.random_quote),
             )
         },
         floatingActionButton = {
@@ -62,7 +62,7 @@ fun RandomQuoteScreen(
                     .padding(all = padding.calculateTopPadding() + 16.dp)
                     .fillMaxSize(),
                 textAlign = TextAlign.Center,
-                text = "저장된 명언이 없습니다."
+                text = stringResource(id = R.string.no_quotes)
             )
         }
     }

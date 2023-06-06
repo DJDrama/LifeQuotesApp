@@ -1,17 +1,18 @@
 <resources>
-    <string name="app_name">Life Quotes</string>
+    <string name="app_name">나만의 명언 모음집</string>
     <string name="navigation_drawer">Navigation Drawer</string>
-    <string name="life_quotes_list">Life Quotes List</string>
-    <string name="random_quote">Random Quote</string>
-    <string name="favorite">Favorite</string>
-    <string name="more">More</string>
-    <string name="add">Add Quote</string>
-    <string name="add_quote">Add Quote</string>
-    <string name="modify_quote">Modify Quote</string>
-    <string name="quote">Quote</string>
-    <string name="author">Author</string>
-    <string name="description">Description</string>
-    <string name="delete">Delete</string>
-    <string name="cancel">Cancel</string>
-    <string name="modify">Modify</string>
+    <string name="life_quotes_list">명언 리스트</string>
+    <string name="random_quote">랜덤 명언</string>
+    <string name="favorite">즐겨찾기</string>
+    <string name="more">더보기</string>
+    <string name="add_quote">명언 추가</string>
+    <string name="modify_quote">명언 수정</string>
+    <string name="quote">명언</string>
+    <string name="author">명언가</string>
+    <string name="description">설명</string>
+    <string name="delete">삭제</string>
+    <string name="cancel">취소</string>
+    <string name="modify">수정</string>
+    <string name="no_favorite">즐겨찾기가 없습니다.</string>
+    <string name="no_quotes">저장된 명언이 없습니다.</string>
 </resources>
