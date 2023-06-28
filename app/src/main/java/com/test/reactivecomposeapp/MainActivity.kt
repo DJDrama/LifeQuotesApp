@@ -7,19 +7,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.test.reactivecomposeapp.data.db.StudentDao
-import com.test.reactivecomposeapp.data.repository.StudentRepositoryImpl
 import com.test.reactivecomposeapp.ui.student_screen.StudentViewModel
 import com.test.reactivecomposeapp.ui.student_screen.StudentViewModelFactory
 import com.test.reactivecomposeapp.ui.student_screen.StudentsScreen
 import com.test.reactivecomposeapp.ui.theme.ReactiveComposeAppTheme
 
-@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

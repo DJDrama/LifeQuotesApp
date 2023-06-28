@@ -1,6 +1,5 @@
 package com.test.reactivecomposeapp.ui.student_screen.components
 
-import android.inputmethodservice.Keyboard
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth

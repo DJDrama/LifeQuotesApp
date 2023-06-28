@@ -39,7 +39,7 @@ constructor(
     private fun onChangeAge(age: String) {
         _uiState.update {
             it.copy(
-                studentDetail = it.studentDetail?.copy(age = age.toInt())
+                studentDetail = it.studentDetail?.copy(age = age.ifBlank { "0" }.toInt())
             )
         }
     }
